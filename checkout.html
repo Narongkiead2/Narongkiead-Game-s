@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ชำระเงิน - NARONGKIEAD GAME's</title>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link href="css/multiColumnTemplate.css" rel="stylesheet" type="text/css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <style>
+    .checkout-container {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+      color: white;
+    }
+
+    .checkout-header {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #FFD700;
+    }
+
+    .checkout-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .order-summary {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+
+    .order-items {
+      margin: 20px 0;
+      max-height: 300px;
+      overflow-y: auto;
+      scrollbar-width: none;  /* สำหรับ Firefox */
+      -ms-overflow-style: none;  /* สำหรับ IE และ Edge */
+    }
+
+    /* ซ่อน scrollbar สำหรับ Chrome, Safari และ Opera */
+    .order-items::-webkit-scrollbar {
+      display: none;
+    }
+
+    .order-item {
+      display: grid;
+      grid-template-columns: 60px 1fr auto auto;
+      gap: 15px;
+      align-items: center;
+      padding: 15px;
+      background: rgba(128, 128, 128, 0.2);
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .cart-item-controls button {
+      all: unset;
+      color: #FFD700;
+      font-weight: 900;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    button.remove {
+      color: #FFD700;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .cart-item-controls button:hover,
+    button.remove:hover {
+      color: #FFA500;
+    }
+
+    .payment-section {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .qr-code {
+      max-width: 300px;
+      margin: 20px auto;
+      padding: 15px;
+      background: white;
+      border-radius: 10px;
+    }
+
+    .qr-code img {
+      width: 100%;
+      height: auto;
+    }
+
+    .payment-info {
+      text-align: left;
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+    }
+
+    .payment-info p {
+      margin: 10px 0;
+      color: #FFD700;
+    }
+
+    .total-section {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .total-amount {
+      font-size: 24px;
+      color: #FFD700;
+      font-weight: bold;
+    }
+
+    .confirm-button {
+      background: #FFD700;
+      color: black;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .confirm-button:hover {
+      background: #FFA500;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .checkout-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .checkout-container {
+        margin: 20px;
+        padding: 15px;
+      }
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.9);
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+      max-width: 400px;
+      width: 90%;
+      animation: slideIn 0.3s ease;
+    }
+
+    .modal-icon {
+      font-size: 60px;
+      color: #4CAF50;
+      margin-bottom: 20px;
+    }
+
+    .modal-content h2 {
+      color: #FFD700;
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    .modal-content p {
+      color: white;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .modal-button {
+      background: #FFD700;
+      color: black;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .modal-button:hover {
+      background: #FFA500;
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translate(-50%, -60%);
+        opacity: 0;
+      }
+      to {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+      }
+    }
+
+    /* สำหรับหน้าจอมือถือ */
+    @media (max-width: 768px) {
+      .modal-content {
+        padding: 30px;
+        width: 85%;
+      }
+      
+      .modal-icon {
+        font-size: 50px;
+      }
+      
+      .modal-content h2 {
+        font-size: 24px;
+      }
+      
+      .modal-content p {
+        font-size: 14px;
+      }
+    }
+
+    .quantity {
+      color: #FFD700;
+      font-size: 14px;
+    }
+
+    /* Stripe Elements จะถูกแสดงในนี้ */
+    #payment-element {
+      margin-bottom: 24px;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #ffffff;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #payment-message {
+      color: #FFD700;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    /* Stripe Payment Styles */
+    .stripe-payment {
+      max-width: 500px;
+      margin: 0 auto 30px;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #payment-form {
+      width: 100%;
+    }
+
+    #payment-element {
+      margin-bottom: 24px;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .payment-divider {
+      position: relative;
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .payment-divider::before,
+    .payment-divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 45%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .payment-divider::before {
+      left: 0;
+    }
+
+    .payment-divider::after {
+      right: 0;
+    }
+
+    .payment-divider span {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 0 15px;
+      color: #FFD700;
+      font-weight: bold;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #ffffff;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #payment-message {
+      color: #FFD700;
+      text-align: center;
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    /* ปรับแต่งปุ่ม Confirm */
+    .confirm-button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      background: linear-gradient(45deg, #FFD700, #FFA500);
+      border: none;
+      border-radius: 8px;
+      color: black;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .confirm-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+    }
+
+    .confirm-button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .payment-section {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+
+    #payment-message {
+      color: #ff0000;
+      padding: 10px;
+      margin: 10px 0;
+      background: rgba(255, 0, 0, 0.1);
+      border-radius: 5px;
+      display: none;
+    }
+
+    #payment-message.visible {
+      display: block;
+    }
+
+    #payment-element {
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+    }
+
+    #submit {
+      width: 100%;
+      padding: 12px;
+      background: #FFD700;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #submit:hover {
+      background: #FFA500;
+      transform: translateY(-2px);
+    }
+
+    #submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      border-top-color: #000;
+      animation: spin 1s linear infinite;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to {transform: rotate(360deg);}
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <img src="images/HD.png" alt="Header Image" class="header-image">
+  </header>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <ul class="navbar-menu">
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="pc.html">PC</a></li>
+      <li><a href="psn.html">PSN</a></li>
+      <li><a href="xbox.html">XBOX</a></li>
+      <li><a href="nintendo.html">NINTENDO</a></li>
+      <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+  </nav>
+
+  <!-- Checkout Content -->
+  <div class="checkout-container">
+    <div class="checkout-header">
+      <h1>Make payment</h1>
+    </div>
+
+    <div class="checkout-content">
+      <!-- Order Summary -->
+      <div class="order-summary">
+        <h2>Order summary</h2>
+        <div class="order-items" id="checkout-items">
+          <!-- รายการสินค้าจะถูกเพิ่มด้วย JavaScript -->
+        </div>
+        <div class="total-section">
+          <h3>Grand total:</h3>
+          <div class="total-amount">$<span id="checkout-total">0.00</span></div>
+        </div>
+      </div>
+
+      <!-- Payment Section -->
+      <div class="payment-section">
+        <h2>Payment with Credit/Debit Card</h2>
+        
+        <!-- Card Element Container -->
+        <div id="payment-element">
+          <!-- Stripe Elements will be injected here -->
+        </div>
+
+        <!-- Payment Form -->
+        <form id="payment-form">
+          <!-- Payment Status Message -->
+          <div id="payment-message" class="hidden"></div>
+          
+          <!-- Submit Button -->
+          <button id="submit" class="confirm-button">
+            <div class="spinner hidden" id="spinner"></div>
+            <span id="button-text">Pay Now</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="copyright">&copy; 2024 - <strong>NARONGKIEAD NOYMALIWAN</strong></div>
+  </footer>
+
+  <!-- เพิ่ม HTML สำหรับ Modal ไว้ก่อ tag ปิด body -->
+  <div id="thankYouModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h2>Thank You!</h2>
+      <p>We will verify your payment and ship the goods as soon as possible.</p>
+      <button onclick="closeModal()" class="modal-button">OK</button>
+    </div>
+  </div>
+
+  <script>
+    // เพิ่มตัวแปร cart ในะดับ global
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    function confirmPayment() {
+      // แสดง modal แทน alert
+      document.getElementById('thankYouModal').style.display = 'block';
+      // ล้างตะก้าสินค้า
+      localStorage.removeItem('cart');
+      // ตั้งเวลากลับไปหน้าแรกหลังจากกปุ่ม OK
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 3000);
+    }
+
+    function closeModal() {
+      document.getElementById('thankYouModal').style.display = 'none';
+      window.location.href = 'index.html';
+    }
+
+    // ปิด Modal เมื่อคลิกนอกกรอบ
+    window.onclick = function(event) {
+      const modal = document.getElementById('thankYouModal');
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+
+    function updateQuantity(productId, newQuantity) {
+      if (newQuantity < 1) {
+        removeItem(productId);
+        return;
+      }
+      
+      const itemIndex = cart.findIndex(item => item.id === productId);
+      if (itemIndex !== -1) {
+        cart[itemIndex].quantity = newQuantity;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateDisplay();
+      }
+    }
+
+    function removeItem(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      const checkoutItems = document.getElementById('checkout-items');
+      const checkoutTotal = document.getElementById('checkout-total');
+      
+      checkoutItems.innerHTML = '';
+      let total = 0;
+      
+      cart.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.className = 'order-item';
+        itemElement.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="quantity">Quantity: ${item.quantity}</div>
+          <div style="color: #FFD700;">$${(item.price * item.quantity).toFixed(2)}</div>
+        `;
+        checkoutItems.appendChild(itemElement);
+        total += item.price * item.quantity;
+      });
+      
+      checkoutTotal.textContent = total.toFixed(2);
+    }
+
+    // เรียกใช้ updateDisplay เมื่อโหลดหน้า
+    document.addEventListener('DOMContentLoaded', () => {
+      cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      updateDisplay();
+    });
+
+  </script>
+
+<!-- Payment Form Section -->
+<div class="payment-section">
+  <h2>Payment with Credit/Debit Card</h2>
+  <div id="payment-message" class="hidden"></div>
+  <form id="payment-form">
+    <div id="payment-element"></div>
+    <button id="submit" class="confirm-button">
+      <div class="spinner hidden" id="spinner"></div>
+      <span id="button-text">Pay Now</span>
+    </button>
+  </form>
+</div>
+
+  	<!-- เพ��่มหลังจากส่วน game-slider -->
+<div class="social-media-section">
+  <div class="social-media-icons">
+    <a href="https://www.facebook.com/location2203/" class="social-icon" target="_blank">
+      <img src="images/f.jpg" alt="Facebook">
+    </a>
+    <a href="https://www.instagram.com/nrk.kkkkkk/" class="social-icon" target="_blank">
+      <img src="images/i.jpg" alt="Instagram">
+    </a>
+    <a href="https://www.youtube.com/@oumnrk990" class="social-icon" target="_blank">
+      <img src="images/y.jpg" alt="YouTube">
+    </a>
+  </div>
+</div>
+
+<script src="js/payment.js"></script>
+</body>
+</html>
+
+
+
+
+

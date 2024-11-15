@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Payment Success - NARONGKIEAD GAME's</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <script src="https://js.stripe.com/v3/"></script>
+    <link href="css/multiColumnTemplate.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+    <div class="checkout-container">
+        <div class="checkout-header">
+            <h1>Payment Status</h1>
+        </div>
+        <div id="message"></div>
+        
+        <div class="home-button">
+            <a href="index.html" class="icon-button">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const stripe = Stripe('pk_live_51QLNKeKbsfg3iOwVMCbsgZiXX6MHL1y3gy2kEjPtlTn7qgBqspRAodKLtTUTVfCeMmXllTm8uA4ltcFlVNXqSAWW007i9BHgAc');
+        
+        // Get the client secret from the URL
+        const clientSecret = new URLSearchParams(window.location.search).get('payment_intent_client_secret');
+
+        if (clientSecret) {
+            stripe.retrievePaymentIntent(clientSecret).then(({paymentIntent}) => {
+                const message = document.querySelector('#message');
+                
+                switch (paymentIntent.status) {
+                    case "succeeded":
+                        message.innerHTML = `
+                            <div class="status-icon success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="status-message">
+                                <h2>ชำระเงินสำเร็จ!</h2>
+                                <p>ขอบคุณสำหรับการสั่งซื้อ</p>
+                            </div>
+                        `;
+                        localStorage.removeItem('cart');
+                        break;
+                    case "processing":
+                        message.innerHTML = `
+                            <div class="status-icon processing">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                            <div class="status-message">
+                                <h2>กำลังดำเนินการ</h2>
+                                <p>กรุณารอสักครู่...</p>
+                            </div>
+                        `;
+                        break;
+                    case "requires_payment_method":
+                        message.innerHTML = `
+                            <div class="status-icon error">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <div class="status-message">
+                                <h2>การชำระเงินล้มเหลว</h2>
+                                <p>กรุณาลองใหม่อีกครั้ง</p>
+                            </div>
+                        `;
+                        break;
+                    default:
+                        message.innerHTML = `
+                            <div class="status-icon error">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="status-message">
+                                <h2>An error occurred</h2>
+                                <p>Please contact the staff</p>
+                            </div>
+                        `;
+                        break;
+                }
+            });
+        }
+    </script>
+
+    <footer class="footer">
+        <div class="copyright">&copy; 2024 - <strong>NARONGKIEAD NOYMALIWAN</strong></div>
+    </footer>
+</body>
+</html>
+
+
+
+
+

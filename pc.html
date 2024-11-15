@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NARONGKIEAD GAME's</title>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link href="css/multiColumnTemplate.css" rel="stylesheet" type="text/css">
+	 <!-- เชื่อมต่อ Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  
+  <!-- เชื่อมต่อ Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ส่วนหัว (Header) ที่มีรูปภาพ -->
+  <header>
+    <img src="images/HD.png" alt="Header Image" class="header-image">
+  </header>
+
+  <!-- เมนูนำทาง -->
+  <nav class="navbar">
+    <ul class="navbar-menu">
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="pc.html">PC</a></li>
+      <li><a href="psn.html">PSN</a></li>
+      <li><a href="xbox.html">XBOX</a></li>
+      <li><a href="nintendo.html">NINTENDO</a></li>
+      <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+  </nav>
+	
+				<!-- ตะกร้าสินค้า -->
+		<div id="cart" class="cart" style="display: none;"> <!-- เริ่มต้นซ่อนตะกร้า -->
+		  <h3>Your Cart</h3>
+		  <ul id="cart-items">
+			<!-- รายการสินค้าจะถูกเพิ่มที่นี่ -->
+		  </ul>
+		  <div class="cart-total">
+			<span>Total: $<span id="total-price">0.00</span></span>
+		  </div>
+		  <button class="checkout-button">Checkout</button>
+</div>
+
+<!-- เพิ่มไอคอนตะกร้าที่หายไป -->
+<div class="cart-icon" onclick="toggleCart()">
+  <i class="fas fa-shopping-cart"></i>
+  <span class="cart-count">0</span>
+</div>
+
+<!-- ส่วนสไลด์ -->
+<div class="slider">
+  <div class="slider-images">
+    <img src="images/sl1.jpg" alt="Game 1">
+    <img src="images/sl2.jpg" alt="Game 2">
+    <img src="images/sl3.jpg" alt="Game 3">
+    <img src="images/sl4.jpg" alt="Game 4">
+	<img src="images/sl5.jpg" alt="Game 5">
+	<img src="images/sl6.jpg" alt="Game 6">
+	<img src="images/sl7.jpg" alt="Game 7">
+	<img src="images/sl8.jpg" alt="Game 8">
+  </div>
+</div>
+	
+	
+	<div class="product-container">
+  <div class="region-notice">
+    <div class="marquee">
+      <span>WelCome To Website.  You are seeing games that are valid in your region which is 'Thailand'.   If you want to see all games available</span>
+ 
+    </div>
+  </div>
+    <!-- เพิ่มการ์ดสินค้าอื่นๆ ตามลำดับ -->
+</div>
+  <!-- ส่วนขายสินค้า -->
+  <div class="product-container">
+    <!-- แถวที่ 1 -->
+    <div class="product-card">
+      <img src="images/pc/pc1.jpg" alt="Game 1" class="product-image">
+      <h3 class="product-name">Farming Simulator 25 PC</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 26,
+        name: 'Farming Simulator 25 PC',
+        price: 59.99,
+        image: 'images/pc/pc1.jpg'
+      })" class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="images/pc/pc2.jpg" alt="Game 2" class="product-image">
+      <h3 class="product-name">Minecraft: Java & Bedrock Edition PC (WW)</h3>
+      <div class="product-price">$49.99</div>
+      <button onclick="addToCart({
+        id: 27,
+        name: 'Minecraft: Java & Bedrock Edition PC (WW)',
+        price: 49.99,
+        image: 'images/pc/pc2.jpg'
+      })" class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="images/pc/pc3.jpg" alt="Game 3" class="product-image">
+      <h3 class="product-name">Farming Simulator 25 - Year 1 Edition PC</h3>
+      <div class="product-price">$39.99</div>
+      <button onclick="addToCart({
+        id: 28,
+        name: 'Farming Simulator 25 - Year 1 Edition PC',
+        price: 59.99,
+        image: 'images/pc/pc3.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="images/pc/pc4.jpg" alt="Game 4" class="product-image">
+      <h3 class="product-name">The Sims 4 Life and Death PC - DLC</h3>
+      <div class="product-price">$29.99</div>
+      <button onclick="addToCart({
+        id: 29,
+        name: 'The Sims 4 Life and Death PC - DLC',
+        price: 59.99,
+        image: 'images/pc/pc4.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  
+    <div class="product-card">
+      <img src="images/pc/pc5.jpg" alt="Game 5" class="product-image">
+      <h3 class="product-name">Farming Simulator 25 PC (GIANTS)</h3>
+      <div class="product-price">$19.99</div>
+      <button onclick="addToCart({
+        id: 30,
+        name: 'Farming Simulator 25 PC (GIANTS)',
+        price: 59.99,
+        image: 'images/pc/pc5.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="images/pc/pc6.png" alt="Game 6" class="product-image">
+      <h3 class="product-name">CALL OF DUTY: BLACK OPS 6 - 15 Min Double XP Boost + 15 Min Weapon XP Boost DLC Xbox/PC/PS</h3>
+      <div class="product-price">$24.99</div>
+      <button onclick="addToCart({
+        id: 31,
+        name: 'CALL OF DUTY: BLACK OPS 6 - 15 Min Double XP Boost + 15 Min Weapon XP Boost DLC Xbox/PC/PS',
+        price: 59.99,
+        image: 'images/pc/pc6.png'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="images/pc/pc7.jpg" alt="Game 7" class="product-image">
+      <h3 class="product-name">Grand Theft Auto V 5 (GTA 5): Premium Online Edition PC - Rockstar Games Launcher</h3>
+      <div class="product-price">$39.99</div>
+      <button onclick="addToCart({
+        id: 32,
+        name: 'Grand Theft Auto V 5 (GTA 5): Premium Online Edition PC - Rockstar Games Launcher',
+        price: 59.99,
+        image: 'images/pc/pc7.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="images/pc/pc8.png" alt="Game 8" class="product-image">
+      <h3 class="product-name">CALL OF DUTY: BLACK OPS 6 - 15 Min Double XP Boost DLC Xbox/PC/PS</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 33,
+        name: 'CALL OF DUTY: BLACK OPS 6 - 15 Min Double XP Boost DLC Xbox/PC/PS',
+        price: 59.99,
+        image: 'images/pc/pc8.png'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/pc/pc9.jpg" alt="Game 9" class="product-image">
+      <h3 class="product-name">Grand Theft Auto Online (GTA V 5): Megalodon Shark Cash Card PC</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 34,
+        name: 'Grand Theft Auto Online (GTA V 5): Megalodon Shark Cash Card PC',
+        price: 59.99,
+        image: 'images/pc/pc9.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/pc/pc10.jpg" alt="Game 10" class="product-image">
+      <h3 class="product-name">Six Days in Fallujah PC</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 35,
+        name: 'Six Days in Fallujah PC',
+        price: 59.99,
+        image: 'images/pc/pc10.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/pc/pc11.jpg" alt="Game 11" class="product-image">
+      <h3 class="product-name">The Elder Scrolls V 5 Skyrim Special Edition PC</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 36,
+        name: 'The Elder Scrolls V 5 Skyrim Special Edition PC',
+        price: 59.99,
+        image: 'images/pc/pc11.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/pc/pc12.jpg" alt="Game 12" class="product-image">
+      <h3 class="product-name">The Sims 4 Life and Death Macabre Mementos Digital Content PC - DLC</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 37,
+        name: 'The Sims 4 Life and Death Macabre Mementos Digital Content PC - DLC',
+        price: 59.99,
+        image: 'images/pc/pc12.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/pc/pc13.jpg" alt="Game 13" class="product-image">
+      <h3 class="product-name">The Sims 4: Lovestruck Expansion Pack PC/Mac</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 38,
+        name: 'The Sims 4: Lovestruck Expansion Pack PC/Mac',
+        price: 59.99,
+        image: 'images/pc/pc13.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/pc/pc14.jpg" alt="Game 14" class="product-image">
+      <h3 class="product-name">Dead by Daylight PC</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 39,
+        name: 'Dead by Daylight PC',
+        price: 59.99,
+        image: 'images/pc/pc14.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/pc/pc15.jpg" alt="Game 15" class="product-image">
+      <h3 class="product-name">Red Dead Redemption 2 - Ultimate Edition PC - Rockstar Games Launcher</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 40,
+        name: 'Red Dead Redemption 2 - Ultimate Edition PC - Rockstar Games Launcher',
+        price: 59.99,
+        image: 'images/pc/pc15.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/pc/pc16.jpg" alt="Game 16" class="product-image">
+      <h3 class="product-name">Warhammer 40,000: Space Marine 2 PC</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 41,
+        name: 'Warhammer 40,000: Space Marine 2 PC',
+        price: 59.99,
+        image: 'images/pc/pc16.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/pc/pc17.jpg" alt="Game 17" class="product-image">
+      <h3 class="product-name">Red Dead Redemption 2 PC - Rockstar Games Launcher</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 42,
+        name: 'Red Dead Redemption 2 PC - Rockstar Games Launcher',
+        price: 59.99,
+        image: 'images/pc/pc17.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/pc/pc18.jpg" alt="Game 18" class="product-image">
+      <h3 class="product-name">Hogwarts Legacy Deluxe Edition PC (WW)</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 43,
+        name: 'Hogwarts Legacy Deluxe Edition PC (WW)',
+        price: 59.99,
+        image: 'images/pc/pc18.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/pc/pc19.jpg" alt="Game 19" class="product-image">
+      <h3 class="product-name">The Sims 4 : For Rent Expansion PC/Mac</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 44,
+        name: 'The Sims 4 : For Rent Expansion PC/Mac',
+        price: 59.99,
+        image: 'images/pc/pc19.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/pc/pc20.jpg" alt="Game 20" class="product-image">
+      <h3 class="product-name">Cyberpunk 2077: Ultimate Edition PC (GOG)</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 45,
+        name: 'Cyberpunk 2077: Ultimate Edition PC (GOG)',
+        price: 59.99,
+        image: 'images/pc/pc20.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/pc/pc21.jpg" alt="Game 21" class="product-image">
+      <h3 class="product-name">Assetto Corsa Ultimate Edition PC</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 46,
+        name: 'Assetto Corsa Ultimate Edition PC',
+        price: 59.99,
+        image: 'images/pc/pc21.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/pc/pc22.png" alt="Game 22" class="product-image">
+      <h3 class="product-name">DRAGON QUEST III HD-2D Remake PC</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 47,
+        name: 'DRAGON QUEST III HD-2D Remake PC',
+        price: 59.99,
+        image: 'images/pc/pc22.png'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+
+
+
+
+	  <div class="product-card">
+      <img src="images/pc/pc23.jpg" alt="Game 23" class="product-image">
+      <h3 class="product-name">PlateUp! PC</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 48,
+        name: 'PlateUp! PC',
+        price: 59.99,
+        image: 'images/pc/pc23.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/pc/pc24.jpg" alt="Game 24" class="product-image">
+      <h3 class="product-name">Squad PC</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 49,
+        name: 'Squad PC',
+        price: 59.99,
+        image: 'images/pc/pc24.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	   <div class="product-card">
+      <img src="images/pc/pc25.jpg" alt="Game 25" class="product-image">
+      <h3 class="product-name">The Sims 4 : Horse Ranch Expansion PC/Mac</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 50,
+        name: 'The Sims 4 : Horse Ranch Expansion PC/Mac',
+        price: 59.99,
+        image: 'images/pc/pc25.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div> 
+  </div>
+  
+<!-- ------------------------------------------------------------------------------------------- -->
+<div class="game-slider">
+  <button class="nav-btn prev">&#10094;</button>
+  
+  <div class="slider-container">
+    <div class="game-cards">
+      <!-- การ์ดเกม 1 -->
+      <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg1.jpg" alt="Ghost of Tsushima">
+        </div>
+      </div>
+
+      <!-- การ์ดเกม 2 -->
+      <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg2.jpg" alt="The Witcher 3">
+        </div>
+      </div>
+
+      <!-- การ์ดเกม 3 -->
+      <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg3.jpg" alt="Spider-Man: Miles Morales">
+        </div>
+      </div>
+
+      <!-- การ์ดเกม 4 -->
+      <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg4.jpg" alt="Cult of the Lamb">
+        </div>
+      </div>
+
+      <!-- การ์ดเกม 5 -->
+      <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg5.jpg" alt="GTA San Andreas">
+        </div>
+      </div>
+
+      <!-- การ์ดเกม 6 -->
+      <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg6.jpg" alt="GTA San Andreas">
+        </div>
+      </div>
+
+       <!-- การ์ดเกม 7 -->
+       <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg7.jpg" alt="GTA San Andreas">
+        </div>
+      </div>
+
+       <!-- การ์ดเกม 8 -->
+       <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg8.jpg" alt="GTA San Andreas">
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <button class="nav-btn next">&#10095;</button>
+</div>
+<!-- ------------------------------------------------------------------------------------------- -->
+
+
+	
+		
+	
+	
+ 
+
+	
+		
+	<!--Money-->
+	<div class="money">
+	  <img src="images/mn1.jpg" alt="mn1" class="product-image">
+		 <img src="images/mn2.jpg" alt="mn2" class="product-image">
+		 <img src="images/mn3.jpg" alt="mn3" class="product-image">
+		 <img src="images/mn4.jpg" alt="mn4" class="product-image">
+		 <img src="images/mn5.jpg" alt="mn5" class="product-image">
+		 <img src="images/mn6.jpg" alt="mn6" class="product-image">
+		 <img src="images/mn7.jpg" alt="mn7" class="product-image">
+		 <img src="images/mn8.jpg" alt="mn8" class="product-image">
+		 <img src="images/mn9.jpg" alt="mn9" class="product-image">
+		 <img src="images/mn10.jpg" alt="mn10" class="product-image">
+		 <img src="images/mn11.jpg" alt="mn11" class="product-image">
+     
+	</div>
+	
+  <!-- ส่วนท้าย -->
+  <footer class="footer">
+    
+  <div class="copyright">&copy; 2024 - <strong>NARONGKIEAD NOYMALIWAN </strong></div>
+  </footer>
+
+	<!-- เพิ่มหลังจากส่วน game-slider -->
+<div class="social-media-section">
+  <div class="social-media-icons">
+    <a href="https://www.facebook.com/location2203/" class="social-icon" target="_blank">
+      <img src="images/f.jpg" alt="Facebook">
+    </a>
+    <a href="https://www.instagram.com/nrk.kkkkkk/" class="social-icon" target="_blank">
+      <img src="images/i.jpg" alt="Instagram">
+    </a>
+    <a href="https://www.youtube.com/@oumnrk990" class="social-icon" target="_blank">
+      <img src="images/y.jpg" alt="YouTube">
+    </a>
+  </div>
+</div>
+
+  <!-- ใส่ลิงก์ไปยังไฟล์ JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>
+
+
+
+
+

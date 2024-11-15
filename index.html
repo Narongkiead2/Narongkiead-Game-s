@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NARONGKIEAD GAME's </title>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link href="css/multiColumnTemplate.css" rel="stylesheet" type="text/css">
+	 <!-- เชื่อมต่อ Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  
+  <!-- เชื่อมต่อ Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ส่วนหัว (Header) ที่มีรูปภาพ -->
+  <header>
+    <img src="images/HD.png" alt="Header Image" class="header-image">
+  </header>
+
+  <!-- เมนูนำทาง -->
+  <nav class="navbar">
+    <ul class="navbar-menu">
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="pc.html">PC</a></li>
+      <li><a href="psn.html">PSN</a></li>
+      <li><a href="xbox.html">XBOX</a></li>
+      <li><a href="nintendo.html">NINTENDO</a></li>
+      <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+  </nav>
+	
+				<!-- ตะกร้าสินค้า -->
+		<div id="cart" class="cart" style="display: none;"> <!-- เริ่มต้นซ่อนตะกร้า -->
+		  <h3>Your Cart</h3>
+		  <ul id="cart-items">
+			<!-- รายการสินค้าจะถูกเพิ่มที่นี่ -->
+		  </ul>
+		  <div class="cart-total">
+			<span>Total: $<span id="total-price">0.00</span></span>
+		  </div>
+		  <button class="checkout-button">Checkout</button>
+</div>
+
+<!-- เพิ่มไอคอนตะกร้าที่หายไป -->
+<div class="cart-icon" onclick="toggleCart()">
+  <i class="fas fa-shopping-cart"></i>
+  <span class="cart-count">0</span>
+</div>
+
+<!-- ส่วนสไลด์ -->
+<div class="slider">
+  <div class="slider-images">
+    <img src="images/sl1.jpg" alt="Game 1">
+    <img src="images/sl2.jpg" alt="Game 2">
+    <img src="images/sl3.jpg" alt="Game 3">
+    <img src="images/sl4.jpg" alt="Game 4">
+	<img src="images/sl5.jpg" alt="Game 5">
+	<img src="images/sl6.jpg" alt="Game 6">
+	<img src="images/sl7.jpg" alt="Game 7">
+	<img src="images/sl8.jpg" alt="Game 8">
+  </div>
+</div>
+	
+	
+	<div class="product-container">
+  <div class="region-notice">
+    <div class="marquee">
+      <span>WelCome To Website.  You are seeing games that are valid in your region which is 'Thailand'.   If you want to see all games available</span>
+ 
+    </div>
+  </div>
+    <!-- เพิ่มการ์ดสินค้าอื่นๆ ตามลำดับ -->
+</div>
+  <!-- ส่วนขายสินค้า -->
+  <div class="product-container">
+    <!-- แถวที่ 1 -->
+    <div class="product-card">
+      <img src="images/g1.jpg" alt="Game 1" class="product-image">
+      <h3 class="product-name">Marvel's Guardians of the Galaxy</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 1,
+        name: 'Marvel\'s Guardians of the Galaxy',
+        price: 59.99,
+        image: 'images/g1.jpg'
+      })" class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="images/g2.jpg" alt="Game 2" class="product-image">
+      <h3 class="product-name">Tales of Arise</h3>
+      <div class="product-price">$49.99</div>
+      <button onclick="addToCart({
+        id: 2,
+        name: 'Tales of Arise',
+        price: 59.99,
+        image: 'images/g2.jpg'
+      })" class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="images/g3.jpg" alt="Game 3" class="product-image">
+      <h3 class="product-name">Warhammer 40,000: Space Marine 2</h3>
+      <div class="product-price">$39.99</div>
+      <button onclick="addToCart({
+        id: 3,
+        name: 'Warhammer 40,000: Space Marine 2',
+        price: 59.99,
+        image: 'images/g3.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="images/g4.jpg" alt="Game 4" class="product-image">
+      <h3 class="product-name">Mafia III: Definitive Edition</h3>
+      <div class="product-price">$29.99</div>
+      <button onclick="addToCart({
+        id: 4,
+        name: 'Mafia III: Definitive Edition',
+        price: 59.99,
+        image: 'images/g4.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  
+    <div class="product-card">
+      <img src="images/g5.jpg" alt="Game 5" class="product-image">
+      <h3 class="product-name">Klonoa Phantasy Reverie Series</h3>
+      <div class="product-price">$19.99</div>
+      <button onclick="addToCart({
+        id: 5,
+        name: 'Klonoa Phantasy Reverie Series',
+        price: 59.99,
+        image: 'images/g5.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="images/g6.jpg" alt="Game 6" class="product-image">
+      <h3 class="product-name">Rise of the Tomb Raider</h3>
+      <div class="product-price">$24.99</div>
+      <button onclick="addToCart({
+        id: 6,
+        name: 'Rise of the Tomb Raider',
+        price: 59.99,
+        image: 'images/g6.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="images/g7.jpg" alt="Game 7" class="product-image">
+      <h3 class="product-name">PAC-MAN WORLD Re-PAC</h3>
+      <div class="product-price">$39.99</div>
+      <button onclick="addToCart({
+        id: 7,
+        name: 'PAC-MAN WORLD Re-PAC',
+        price: 59.99,
+        image: 'images/g7.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="images/g8.jpg" alt="Game 8" class="product-image">
+      <h3 class="product-name">SCARLET NEXUS</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 8,
+        name: 'SCARLET NEXUS',
+        price: 59.99,
+        image: 'images/g8.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/g9.jpg" alt="Game 9" class="product-image">
+      <h3 class="product-name">Millennia: Atomic Ambitions</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 9,
+        name: 'Millennia: Atomic Ambitions',
+        price: 59.99,
+        image: 'images/g9.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/g10.jpg" alt="Game 10" class="product-image">
+      <h3 class="product-name">Farming Simulator 25 - MacDon Pack</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 10,
+        name: 'Farming Simulator 25 - MacDon Pack',
+        price: 59.99,
+        image: 'images/g10.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/g11.jpg" alt="Game 11" class="product-image">
+      <h3 class="product-name">Farming Simulator 25 - Year 1 Bundle</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 11,
+        name: 'Farming Simulator 25 - Year 1 Bundle',
+        price: 59.99,
+        image: 'images/g11.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/g12.jpg" alt="Game 12" class="product-image">
+      <h3 class="product-name">Farming Simulator 25</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 12,
+        name: 'Farming Simulator 25',
+        price: 59.99,
+        image: 'images/g12.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/g13.jpg" alt="Game 13" class="product-image">
+      <h3 class="product-name">Everholm</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 13,
+        name: 'Everholm',
+        price: 59.99,
+        image: 'images/g13.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/g14.jpg" alt="Game 14" class="product-image">
+      <h3 class="product-name">Metro Awakening</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 14,
+        name: 'Metro Awakening',
+        price: 59.99,
+        image: 'images/g14.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/g15.jpg" alt="Game 15" class="product-image">
+      <h3 class="product-name">Taiko no Tatsujin: Rhythm Festival The Setlist Edition</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 15,
+        name: 'Taiko no Tatsujin: Rhythm Festival The Setlist Edition',
+        price: 59.99,
+        image: 'images/g15.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/g16.jpg" alt="Game 16" class="product-image">
+      <h3 class="product-name">Taiko no Tatsujin: Rhythm Festival</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 16,
+        name: 'Taiko no Tatsujin: Rhythm Festival',
+        price: 59.99,
+        image: 'images/g16.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/g17.jpg" alt="Game 17" class="product-image">
+      <h3 class="product-name">LEGO® Horizon Adventures™ Digital Deluxe Edition</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 17,
+        name: 'LEGO® Horizon Adventures™ Digital Deluxe Edition',
+        price: 59.99,
+        image: 'images/g17.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/g18.jpg" alt="Game 18" class="product-image">
+      <h3 class="product-name">Tales of Graces F Remastered Deluxe Edition</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 18,
+        name: 'Tales of Graces F Remastered Deluxe Edition',
+        price: 59.99,
+        image: 'images/g18.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/g19.jpg" alt="Game 19" class="product-image">
+      <h3 class="product-name">Tales of Graces F Remastered</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 19,
+        name: 'Tales of Graces F Remastered',
+        price: 59.99,
+        image: 'images/g19.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/g20.jpg" alt="Game 20" class="product-image">
+      <h3 class="product-name">SYNDUALITY Echo of Ada Ultimate Edition</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 20,
+        name: 'SYNDUALITY Echo of Ada Ultimate Edition',
+        price: 59.99,
+        image: 'images/g20.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/g21.jpg" alt="Game 21" class="product-image">
+      <h3 class="product-name">Sid Meier's Civilization® VII</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 21,
+        name: 'Sid Meiers Civilization® VII',
+        price: 59.99,
+        image: 'images/g21.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/g22.jpg" alt="Game 22" class="product-image">
+      <h3 class="product-name">Kingdom Come: Deliverance II Gold Edition</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 22,
+        name: 'Kingdom Come: Deliverance II Gold Edition',
+        price: 59.99,
+        image: 'images/g22.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+
+
+
+
+	  <div class="product-card">
+      <img src="images/g23.jpg" alt="Game 23" class="product-image">
+      <h3 class="product-name">Monster Hunter Wilds Premium Deluxe Edition</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 23,
+        name: 'Monster Hunter Wilds Premium Deluxe Edition',
+        price: 59.99,
+        image: 'images/g23.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	  <div class="product-card">
+      <img src="images/g24.jpg" alt="Game 24" class="product-image">
+      <h3 class="product-name">Monster Hunter Wilds</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 24,
+        name: 'Monster Hunter Wilds',
+        price: 59.99,
+        image: 'images/g24.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div>
+	   <div class="product-card">
+      <img src="images/g25.jpg" alt="Game 25" class="product-image">
+      <h3 class="product-name">End of Lines</h3>
+      <div class="product-price">$59.99</div>
+      <button onclick="addToCart({
+        id: 25,
+        name: 'End of Lines',
+        price: 59.99,
+        image: 'images/g25.jpg'
+      })"class="add-to-cart">Add to Cart</button>
+    </div> 
+  </div>
+  
+<!-- ------------------------------------------------------------------------------------------- -->
+<div class="game-slider">
+  <button class="nav-btn prev">&#10094;</button>
+  
+  <div class="slider-container">
+    <div class="game-cards">
+      <!-- การ์ดเกม 1 -->
+      <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg1.jpg" alt="Ghost of Tsushima">
+        </div>
+      </div>
+
+      <!-- การ์ดเกม 2 -->
+      <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg2.jpg" alt="The Witcher 3">
+        </div>
+      </div>
+
+      <!-- การ์ดเกม 3 -->
+      <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg3.jpg" alt="Spider-Man: Miles Morales">
+        </div>
+      </div>
+
+      <!-- การ์ดเกม 4 -->
+      <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg4.jpg" alt="Cult of the Lamb">
+        </div>
+      </div>
+
+      <!-- การ์ดเกม 5 -->
+      <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg5.jpg" alt="GTA San Andreas">
+        </div>
+      </div>
+
+      <!-- การ์ดเกม 6 -->
+      <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg6.jpg" alt="GTA San Andreas">
+        </div>
+      </div>
+
+       <!-- การ์ดเกม 7 -->
+       <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg7.jpg" alt="GTA San Andreas">
+        </div>
+      </div>
+
+       <!-- การ์ดเกม 8 -->
+       <div class="game-card">
+        <div class="game-image">
+          <img src="images/sg8.jpg" alt="GTA San Andreas">
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <button class="nav-btn next">&#10095;</button>
+</div>
+<!-- ------------------------------------------------------------------------------------------- -->
+
+
+	
+		
+	
+	
+ 
+
+	
+		
+	<!--Money-->
+	<div class="money">
+	  <img src="images/mn1.jpg" alt="mn1" class="product-image">
+		 <img src="images/mn2.jpg" alt="mn2" class="product-image">
+		 <img src="images/mn3.jpg" alt="mn3" class="product-image">
+		 <img src="images/mn4.jpg" alt="mn4" class="product-image">
+		 <img src="images/mn5.jpg" alt="mn5" class="product-image">
+		 <img src="images/mn6.jpg" alt="mn6" class="product-image">
+		 <img src="images/mn7.jpg" alt="mn7" class="product-image">
+		 <img src="images/mn8.jpg" alt="mn8" class="product-image">
+		 <img src="images/mn9.jpg" alt="mn9" class="product-image">
+		 <img src="images/mn10.jpg" alt="mn10" class="product-image">
+		 <img src="images/mn11.jpg" alt="mn11" class="product-image">
+     
+	</div>
+	
+  <!-- ส่วนท้าย -->
+  <footer class="footer">
+    
+  <div class="copyright">&copy; 2024 - <strong>NARONGKIEAD NOYMALIWAN </strong></div>
+  </footer>
+
+	<!-- เพิ่มหลังจากส่วน game-slider -->
+<div class="social-media-section">
+  <div class="social-media-icons">
+    <a href="https://www.facebook.com/location2203/" class="social-icon" target="_blank">
+      <img src="images/f.jpg" alt="Facebook">
+    </a>
+    <a href="https://www.instagram.com/nrk.kkkkkk/" class="social-icon" target="_blank">
+      <img src="images/i.jpg" alt="Instagram">
+    </a>
+    <a href="https://www.youtube.com/@oumnrk990" class="social-icon" target="_blank">
+      <img src="images/y.jpg" alt="YouTube">
+    </a>
+  </div>
+</div>
+
+  <!-- ใส่ลิงก์ไปยังไฟล์ JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>
+
+
+
+
+
